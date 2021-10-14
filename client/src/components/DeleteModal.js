@@ -11,15 +11,20 @@ import { GlobalStoreContext } from '../store'
 */
 function DeleteModal() {
     const { store } = useContext(GlobalStoreContext);
+    let listToDelete = store.listToDelete;
     let name = "";
-    if (store.currentList) {
-        name = store.currentList.name;
+    if (listToDelete && listToDelete.name != null) {
+        // console.log(listToDelete);
+        name = listToDelete.name;
     }
-    function handleDeleteList(event) {
-        store.deleteMarkedList();
+    function handleDeleteList(e) {
+        e.stopPropagation();
+        store.deleteList(listToDelete.id);
+        handleCloseModal();
     }
-    function handleCloseModal(event) {
-        store.hideDeleteListModal();
+    function handleCloseModal(e) {
+        let modal = document.getElementById("delete-modal");
+        modal.classList.remove("is-visible");
     }
     return (
         <div
@@ -39,7 +44,10 @@ function DeleteModal() {
                     <button
                         id="dialog-no-button"
                         className="modal-button"
-                        onClick={handleCloseModal}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleCloseModal();
+                        }}
                     >Cancel</button>
                 </div>
             </div>

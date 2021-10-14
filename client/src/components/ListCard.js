@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { GlobalStoreContext } from '../store'
+// import { DeleteModal } from '.';
 /*
     This is a card in our list of top 5 lists. It lets select
     a list for editing and it has controls for changing its 
@@ -26,11 +27,6 @@ function ListCard(props) {
         }
     }
 
-    function handleToggleEdit(event) {
-        event.stopPropagation();
-        toggleEdit();
-    }
-
     function toggleEdit() {
         let newActive = !editActive;
         if (newActive) {
@@ -41,8 +37,12 @@ function ListCard(props) {
 
     function handleKeyPress(event) {
         if (event.code === "Enter") {
-            let id = event.target.id.substring("list-".length);
-            store.changeListName(id, text);
+            if (text.length > 0) {
+                let id = event.target.id.substring("list-".length);
+                store.changeListName(id, text);
+            } else {
+                // store.clearEditActive();
+            }
             toggleEdit();
         }
     }
@@ -72,18 +72,29 @@ function ListCard(props) {
                 {idNamePair.name}
             </span>
             <input
-                disabled={cardStatus}
+                // disabled={cardStatus}
                 type="button"
                 id={"delete-list-" + idNamePair._id}
                 className="list-card-button"
                 value={"\u2715"}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    let id = e.target.id.substring("delete-list-".length);
+                    let listName = e.target.parentElement.firstChild.innerText;
+                    let modal = document.getElementById("delete-modal");
+                    store.setListToDelete(listName, id);
+                    modal.classList.add("is-visible");
+                }}
             />
             <input
-                disabled={cardStatus}
+                // disabled={cardStatus}
                 type="button"
                 id={"edit-list-" + idNamePair._id}
                 className="list-card-button"
-                onClick={handleToggleEdit}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    toggleEdit();
+                }}
                 value={"\u270E"}
             />
         </div>;

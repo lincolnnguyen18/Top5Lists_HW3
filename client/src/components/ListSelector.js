@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import ListCard from './ListCard.js'
 import { GlobalStoreContext } from '../store'
-import DeleteModal from './DeleteModal'
+// import DeleteModal from './DeleteModal'
 /*
     This React component lists all the top5 lists in the UI.
     
@@ -40,7 +40,7 @@ const ListSelector = () => {
                 {
                     listCard
                 }
-                <DeleteModal />
+                {/* <DeleteModal /> */}
             </div>
         </div>)
 }

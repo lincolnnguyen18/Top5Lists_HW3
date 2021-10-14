@@ -33,7 +33,8 @@ export const useGlobalStore = () => {
         newListCounter: 0,
         listNameActive: false,
         itemActive: false,
-        listMarkedForDeletion: null
+        listMarkedForDeletion: null,
+        listToDelete: {name: null, id: null}
     });
 
     // HERE'S THE DATA STORE'S REDUCER, IT MUST
@@ -103,6 +104,50 @@ export const useGlobalStore = () => {
     // THESE ARE THE FUNCTIONS THAT WILL UPDATE OUR STORE AND
     // DRIVE THE STATE OF THE APPLICATION. WE'LL CALL THESE IN 
     // RESPONSE TO EVENTS INSIDE OUR COMPONENTS.
+
+    store.clearEditActive = () => {
+        setStore({
+            idNamePairs: store.idNamePairs,
+            currentList: store.currentList,
+            newListCounter: store.newListCounter,
+            isListNameEditActive: false,
+            isItemEditActive: false,
+            listMarkedForDeletion: null
+        });
+    }
+
+    store.setListToDelete = (name, id) => {
+        setStore({
+            idNamePairs: store.idNamePairs,
+            currentList: store.currentList,
+            newListCounter: store.newListCounter,
+            isListNameEditActive: store.isListNameEditActive,
+            isItemEditActive: store.isItemEditActive,
+            listMarkedForDeletion: id,
+            listToDelete: {name: name, id: id}
+        });
+    }
+
+    store.deleteList = (id) => {
+        console.log(id);
+        api.deleteTop5ListById(id).then(() => {
+            // console.log('success');
+            // console.log(store.idNamePairs);
+            const newIdNamePairs = store.idNamePairs.filter(pair => pair._id !== id);
+            // console.log(newIdNamePairs);
+            setStore({
+                idNamePairs: newIdNamePairs,
+                currentList: null,
+                newListCounter: store.newListCounter,
+                isListNameEditActive: false,
+                isItemEditActive: false,
+                listMarkedForDeletion: id
+            });
+        }).catch(err => {
+            // console.log('error');
+            console.log(err);
+        });
+    }
 
     // THIS FUNCTION PROCESSES CHANGING A LIST NAME
     store.changeListName = function (id, newName) {

@@ -31,39 +31,21 @@ function EditToolbar() {
             <div
                 // disabled={true}
                 id='undo-button'
-                onClick={() => {
-                    if (store.canUndo()) {
-                        handleUndo();
-                    } else {
-                        console.log('disabled');
-                    }
-                }}
+                onClick={handleUndo}
                 className={`${enabledButtonClass} ${!store.canUndo() ? 'top5-button-disabled' : ''}`}>
                 &#x21B6;
             </div>
             <div
                 // disabled={true}
                 id='redo-button'
-                onClick={() => {
-                    if (store.canRedo()) {
-                        handleRedo();
-                    } else {
-                        console.log('disabled');
-                    }
-                }}
+                onClick={handleRedo}
                 className={`${enabledButtonClass} ${!store.canRedo() ? 'top5-button-disabled' : ''}`}>
                 &#x21B7;
             </div>
             <div
                 // disabled={store.currentList == null}
                 id='close-button'
-                onClick={() => {
-                    if (store.currentList != null) {
-                        handleClose();
-                    } else {
-                        console.log('disabled');
-                    }
-                }}
+                onClick={handleClose}
                 className={`${enabledButtonClass} ${store.currentList == null ? 'top5-button-disabled' : ''}`}>
                 &#x24E7;
             </div>
