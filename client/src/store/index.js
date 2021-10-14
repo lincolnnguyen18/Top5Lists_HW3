@@ -31,7 +31,7 @@ export const useGlobalStore = () => {
         idNamePairs: [],
         currentList: null,
         newListCounter: 0,
-        listNameActive: false,
+        isListNameEditActive: false,
         itemActive: false,
         listMarkedForDeletion: null,
         listToDelete: {name: null, id: null}

@@ -237,6 +237,10 @@ input {
   background-color: lightgray;
 }
 
+.disabledPure {
+  pointer-events:none;
+}
+
 .disabled:hover {
   color: var(--swatch-neutral);
 }

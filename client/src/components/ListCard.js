@@ -65,8 +65,14 @@ function ListCard(props) {
         <div
             id={idNamePair._id}
             key={idNamePair._id}
-            onClick={handleLoadList}
-            className={'list-card ' + selectClass}>
+            // disabled={store.isListNameEditActive}
+            onClick={(e) => {
+                // if (!editActive) {
+                //     handleLoadList(e);
+                // }
+                console.log(store.isListNameEditActive);
+            }}
+            className={`${'list-card ' + selectClass} ${store.isListNameEditActive ? 'disabledPure' : ''}`}>
             <span
                 id={"list-card-text-" + idNamePair._id}
                 key={"span-" + idNamePair._id}

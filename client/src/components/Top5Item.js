@@ -62,6 +62,9 @@ function Top5Item(props) {
                 id={"edit-item-" + index + 1}
                 className="list-card-button"
                 value={"\u270E"}
+                // onClick={() => {
+                //     store.addEditItemTransaction(index);
+                // }}
             />
             {props.text}
         </div>)
