@@ -34,7 +34,7 @@ export const useGlobalStore = () => {
         isListNameEditActive: false,
         itemActive: false,
         listMarkedForDeletion: null,
-        listToDelete: {name: null, id: null}
+        listToDelete: {name: null, id: null},
     });
 
     // HERE'S THE DATA STORE'S REDUCER, IT MUST
@@ -50,7 +50,7 @@ export const useGlobalStore = () => {
                     newListCounter: store.newListCounter,
                     isListNameEditActive: false,
                     isItemEditActive: false,
-                    listMarkedForDeletion: null
+                    listMarkedForDeletion: null,
                 });
             }
             // STOP EDITING THE CURRENT LIST
@@ -61,7 +61,7 @@ export const useGlobalStore = () => {
                     newListCounter: store.newListCounter,
                     isListNameEditActive: false,
                     isItemEditActive: false,
-                    listMarkedForDeletion: null
+                    listMarkedForDeletion: null,
                 })
             }
             // GET ALL THE LISTS SO WE CAN PRESENT THEM
@@ -72,7 +72,7 @@ export const useGlobalStore = () => {
                     newListCounter: store.newListCounter,
                     isListNameEditActive: false,
                     isItemEditActive: false,
-                    listMarkedForDeletion: null
+                    listMarkedForDeletion: null,
                 });
             }
             // UPDATE A LIST
@@ -83,7 +83,7 @@ export const useGlobalStore = () => {
                     newListCounter: store.newListCounter,
                     isListNameEditActive: false,
                     isItemEditActive: false,
-                    listMarkedForDeletion: null
+                    listMarkedForDeletion: null,
                 });
             }
             // START EDITING A LIST NAME
@@ -94,7 +94,7 @@ export const useGlobalStore = () => {
                     newListCounter: store.newListCounter,
                     isListNameEditActive: true,
                     isItemEditActive: false,
-                    listMarkedForDeletion: null
+                    listMarkedForDeletion: null,
                 });
             }
             default:
@@ -105,6 +105,7 @@ export const useGlobalStore = () => {
     // DRIVE THE STATE OF THE APPLICATION. WE'LL CALL THESE IN 
     // RESPONSE TO EVENTS INSIDE OUR COMPONENTS.
 
+
     store.setListNameEditActive = (status) => {
         setStore({
             idNamePairs: store.idNamePairs,
@@ -112,7 +113,7 @@ export const useGlobalStore = () => {
             newListCounter: store.newListCounter,
             isListNameEditActive: status,
             isItemEditActive: false,
-            listMarkedForDeletion: null
+            listMarkedForDeletion: null,
         });
     }
 
@@ -124,7 +125,7 @@ export const useGlobalStore = () => {
             isListNameEditActive: store.isListNameEditActive,
             isItemEditActive: store.isItemEditActive,
             listMarkedForDeletion: id,
-            listToDelete: {name: name, id: id}
+            listToDelete: {name: name, id: id},
         });
     }
 
@@ -168,7 +169,7 @@ export const useGlobalStore = () => {
                     newListCounter: 'lol',
                     isListNameEditActive: false,
                     isItemEditActive: false,
-                    listMarkedForDeletion: null
+                    listMarkedForDeletion: null,
                 });
                 // console.log(store.idNamePairs);
                 store.setCurrentList(newList._id);
@@ -191,7 +192,7 @@ export const useGlobalStore = () => {
                 newListCounter: store.newListCounter,
                 isListNameEditActive: false,
                 isItemEditActive: false,
-                listMarkedForDeletion: id
+                listMarkedForDeletion: id,
             });
         }).catch(err => {
             // console.log('error');

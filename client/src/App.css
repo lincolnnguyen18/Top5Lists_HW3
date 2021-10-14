@@ -220,6 +220,17 @@ input {
   font-size:20pt;
 }
 
+#textbox {
+  font-size: 20pt;
+  width: 100%;
+  height: 60%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  margin-right: 5%;
+}
+
 .top5-item, .top5-item-dragged-to {
   text-align: left;
   width:95%;

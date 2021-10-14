@@ -46,28 +46,40 @@ function Top5Item(props) {
     if (draggedTo) {
         itemClass = "top5-item-dragged-to";
     }
+
+    let itemDiv =
+    <div
+        id={'item-' + (index + 1)}
+        className={itemClass}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        draggable="true"
+    >
+        <input
+            disabled={store.isListNameEditActive}
+            type="button"
+            id={"edit-item-" + index + 1}
+            className={`list-card-button ${store.isListNameEditActive ? 'disabled' : ''}`}
+            value={"\u270E"}
+            onClick={(e) => {
+                e.preventDefault();
+                store.setListNameEditActive(true);
+                // console.log(e.currentTarget.parentElement);
+                // console.log(e.currentTarget.parentElement.innerText);
+                let item = e.currentTarget.parentElement;
+                // store.setRenameItemIndex(item.id.substring(item.id.indexOf("-") + 1));
+                e.currentTarget.parentElement.innerHTML = `<input type='text' id='textbox' value='${item.innerText}' />`;
+            }}
+        />
+        {props.text}
+    </div>;
+
     return (
-        <div
-            id={'item-' + (index + 1)}
-            className={itemClass}
-            onDragStart={handleDragStart}
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            draggable="true"
-        >
-            <input
-                type="button"
-                id={"edit-item-" + index + 1}
-                className="list-card-button"
-                value={"\u270E"}
-                // onClick={() => {
-                //     store.addEditItemTransaction(index);
-                // }}
-            />
-            {props.text}
-        </div>)
+        itemDiv
+    );
 }
 
 export default Top5Item;

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Top5Item from './Top5Item.js'
 import { GlobalStoreContext } from '../store'
@@ -11,6 +11,22 @@ import { GlobalStoreContext } from '../store'
 function Workspace() {
     const { store } = useContext(GlobalStoreContext);
     store.history = useHistory();
+
+    useEffect(() => {
+        document.addEventListener('keydown', (e) => {
+            let textbox = document.getElementById('textbox');
+            if (textbox && e.keyCode === 13) {
+                e.preventDefault();
+                let index = textbox.parentElement.id.split('-')[1];
+                console.log(index);
+                console.log(textbox.value);
+                store.setListNameEditActive(false);
+                // console.log(store.currentList._id);
+                store.setCurrentList(store.currentList._id);
+                return false;
+            }
+        });
+    }, []);
 
     let editItems = "";
     if (store.currentList) {
