@@ -67,10 +67,10 @@ function ListCard(props) {
             key={idNamePair._id}
             // disabled={store.isListNameEditActive}
             onClick={(e) => {
-                // if (!editActive) {
-                //     handleLoadList(e);
-                // }
-                console.log(store.isListNameEditActive);
+                if (!editActive) {
+                    handleLoadList(e);
+                }
+                // console.log(store.isListNameEditActive);
             }}
             className={`${'list-card ' + selectClass} ${store.isListNameEditActive ? 'disabledPure' : ''}`}>
             <span

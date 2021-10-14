@@ -234,7 +234,8 @@ input {
 
 .disabled {
   pointer-events:none;
-  background-color: lightgray;
+  /* background-color: lightgray; */
+  opacity: 0.25;
 }
 
 .disabledPure {
