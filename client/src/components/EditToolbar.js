@@ -22,31 +22,49 @@ function EditToolbar() {
         history.push("/");
         store.closeCurrentList();
     }
-    let editStatus = false;
-    if (store.isListNameEditActive) {
-        editStatus = true;
-    }
+    // let editStatus = false;
+    // if () {
+    //     editStatus = true;
+    // }
     return (
         <div id="edit-toolbar">
             <div
-                disabled={editStatus}
+                // disabled={true}
                 id='undo-button'
-                onClick={handleUndo}
-                className={enabledButtonClass}>
+                onClick={() => {
+                    if (store.canUndo()) {
+                        handleUndo();
+                    } else {
+                        console.log('disabled');
+                    }
+                }}
+                className={`${enabledButtonClass} ${!store.canUndo() ? 'top5-button-disabled' : ''}`}>
                 &#x21B6;
             </div>
             <div
-                disabled={editStatus}
+                // disabled={true}
                 id='redo-button'
-                onClick={handleRedo}
-                className={enabledButtonClass}>
+                onClick={() => {
+                    if (store.canRedo()) {
+                        handleRedo();
+                    } else {
+                        console.log('disabled');
+                    }
+                }}
+                className={`${enabledButtonClass} ${!store.canRedo() ? 'top5-button-disabled' : ''}`}>
                 &#x21B7;
             </div>
             <div
-                disabled={editStatus}
+                // disabled={store.currentList == null}
                 id='close-button'
-                onClick={handleClose}
-                className={enabledButtonClass}>
+                onClick={() => {
+                    if (store.currentList != null) {
+                        handleClose();
+                    } else {
+                        console.log('disabled');
+                    }
+                }}
+                className={`${enabledButtonClass} ${store.currentList == null ? 'top5-button-disabled' : ''}`}>
                 &#x24E7;
             </div>
         </div>

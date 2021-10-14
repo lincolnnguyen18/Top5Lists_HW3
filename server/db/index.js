@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
     This initializes the connection to our database so that we can do CRUD.
     
     @author McKilla Gorilla
+    127.0.0.1:27017
 */
 mongoose
     .connect('mongodb://127.0.0.1:27017/top5lists', { useNewUrlParser: true })
