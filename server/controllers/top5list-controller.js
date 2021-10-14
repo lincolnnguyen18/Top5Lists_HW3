@@ -8,7 +8,7 @@ const Top5List = require('../models/top5list-model')
 */
 createTop5List = (req, res) => {
     const body = req.body;
-    console.log("createTop5List body: " + body);
+    console.log("createTop5List body: " + JSON.stringify(body));
 
     if (!body) {
         return res.status(400).json({

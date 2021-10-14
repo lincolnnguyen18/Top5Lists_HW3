@@ -128,6 +128,55 @@ export const useGlobalStore = () => {
         });
     }
 
+    store.createList = () => {
+        const allLists = store.idNamePairs;
+        // Get the largest untitled list number in allLists
+        // console.log(allLists);
+        let max = 0;
+        allLists.forEach(list => {
+            if (list.name.includes("Untitled")) {
+                let num = parseInt(list.name.substring(8));
+                if (num > max) {
+                    max = num;
+                }
+            }
+        });
+        // console.log(`max is ${max}`);
+        max += 1;
+
+        let newList = {
+            "name": `Untitled ${max}`,
+            "items": [
+                "Item 1",
+                "Item 2",
+                "Item 3",
+                "Item 4",
+                "Item 5"
+            ]
+        }
+        api.createTop5List(newList)
+            .then(res => {
+                res = res.data;
+                const newList = res.top5List;
+                // console.log(newList);
+                // console.log(store.idNamePairs);
+                let newIdNamePairs = [...store.idNamePairs, {_id: newList._id, name: newList.name}];
+                // console.log(newIdNamePairs);
+                setStore({
+                    idNamePairs: newIdNamePairs,
+                    currentList: null,
+                    newListCounter: 'lol',
+                    isListNameEditActive: false,
+                    isItemEditActive: false,
+                    listMarkedForDeletion: null
+                });
+                // console.log(store.idNamePairs);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     store.deleteList = (id) => {
         console.log(id);
         api.deleteTop5ListById(id).then(() => {
