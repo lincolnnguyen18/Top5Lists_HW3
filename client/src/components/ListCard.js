@@ -40,10 +40,10 @@ function ListCard(props) {
             if (text.length > 0) {
                 let id = event.target.id.substring("list-".length);
                 store.changeListName(id, text);
-            } else {
-                // store.clearEditActive();
             }
-            toggleEdit();
+            store.setListNameEditActive(false);
+            setEditActive(false);
+            // toggleEdit();
         }
     }
 
@@ -55,10 +55,12 @@ function ListCard(props) {
     if (selected) {
         selectClass = "selected-list-card";
     }
-    let cardStatus = false;
-    if (store.isListNameEditActive) {
-        cardStatus = true;
-    }
+    let cardStatus = store.isListNameEditActive;
+    // if (store.isListNameEditActive) {
+    //     cardStatus = true;
+    // } else {
+
+    // }
     let cardElement =
         <div
             id={idNamePair._id}
@@ -72,7 +74,7 @@ function ListCard(props) {
                 {idNamePair.name}
             </span>
             <input
-                // disabled={cardStatus}
+                disabled={cardStatus}
                 type="button"
                 id={"delete-list-" + idNamePair._id}
                 className="list-card-button"
@@ -87,13 +89,15 @@ function ListCard(props) {
                 }}
             />
             <input
-                // disabled={cardStatus}
+                disabled={cardStatus}
                 type="button"
                 id={"edit-list-" + idNamePair._id}
                 className="list-card-button"
                 onClick={(e) => {
                     e.stopPropagation();
-                    toggleEdit();
+                    store.setIsListNameEditActive();
+                    store.setListNameEditActive(true);
+                    setEditActive(true);
                 }}
                 value={"\u270E"}
             />

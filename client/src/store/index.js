@@ -46,7 +46,7 @@ export const useGlobalStore = () => {
             case GlobalStoreActionType.CHANGE_LIST_NAME: {
                 return setStore({
                     idNamePairs: payload.idNamePairs,
-                    currentList: payload.top5List,
+                    currentList: null,
                     newListCounter: store.newListCounter,
                     isListNameEditActive: false,
                     isItemEditActive: false,
@@ -105,12 +105,12 @@ export const useGlobalStore = () => {
     // DRIVE THE STATE OF THE APPLICATION. WE'LL CALL THESE IN 
     // RESPONSE TO EVENTS INSIDE OUR COMPONENTS.
 
-    store.clearEditActive = () => {
+    store.setListNameEditActive = (status) => {
         setStore({
             idNamePairs: store.idNamePairs,
             currentList: store.currentList,
             newListCounter: store.newListCounter,
-            isListNameEditActive: false,
+            isListNameEditActive: status,
             isItemEditActive: false,
             listMarkedForDeletion: null
         });
