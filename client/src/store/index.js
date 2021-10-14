@@ -171,6 +171,7 @@ export const useGlobalStore = () => {
                     listMarkedForDeletion: null
                 });
                 // console.log(store.idNamePairs);
+                store.setCurrentList(newList._id);
             })
             .catch(err => {
                 console.log(err);
