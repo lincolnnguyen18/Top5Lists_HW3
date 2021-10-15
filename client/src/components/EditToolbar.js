@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { GlobalStoreContext } from '../store'
 import { useHistory } from 'react-router-dom'
 /*
@@ -10,6 +10,16 @@ import { useHistory } from 'react-router-dom'
 function EditToolbar() {
     const { store } = useContext(GlobalStoreContext);
     const history = useHistory();
+
+    useEffect(() => {
+        document.addEventListener('keydown', (event) => {
+            if (event.keyCode === 90 && event.ctrlKey) {
+                store.undo();
+            } else if (event.keyCode === 89 && event.ctrlKey) {
+                store.redo();
+            }
+        });
+    }, []);
 
     let enabledButtonClass = "top5-button";
     function handleUndo() {
