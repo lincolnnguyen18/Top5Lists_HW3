@@ -56,14 +56,14 @@ updateTop5List = async (req, res) => {
                 message: 'Top 5 List not found!',
             })
         }
-        console.log(`Comparing ${top5List.name} with new name ${body.name}`);
-        if (top5List.name == body.name) {
-            return res.status(200).json({
-                success: true,
-                id: top5List._id,
-                    message: 'Top 5 List updated!',
-                })
-        }
+        // console.log(`Comparing ${top5List.name} with new name ${body.name}`);
+        // if (top5List.name == body.name) {
+        //     return res.status(200).json({
+        //         success: true,
+        //         id: top5List._id,
+        //             message: 'Top 5 List updated!',
+        //         })
+        // }
         top5List.name = body.name
         top5List.items = body.items
         top5List

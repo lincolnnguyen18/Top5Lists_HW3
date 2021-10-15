@@ -119,9 +119,8 @@ export const useGlobalStore = () => {
     }
 
     store.renameItemAtIndex = (index, newName) => {
-        console.log('test');
         let newItems = store.currentList.items.slice();
-        newItems[index - 1] = newName;
+        newItems[index] = newName;
         // console.log(store.currentList.items, newItems);
         let oldList = store.currentList;
         let newList = {
@@ -129,18 +128,18 @@ export const useGlobalStore = () => {
             items: newItems
         }
         // console.log(oldList, newList);
-        api.updateTop5ListById(store.currentList._id, newList);
-        // setStore({
-        //     idNamePairs: store.idNamePairs,
-        //     currentList: {
-        //         ...store.currentList,
-        //         items: newItems
-        //     },
-        //     newListCounter: store.newListCounter,
-        //     isListNameEditActive: false,
-        //     isItemEditActive: false,
-        //     listMarkedForDeletion: null,
-        // });
+        api.updateTop5ListById(store.currentList._id, newList).then(res => {
+            setStore({
+                idNamePairs: store.idNamePairs,
+                currentList: newList,
+                newListCounter: store.newListCounter,
+                isListNameEditActive: false,
+                isItemEditActive: false,
+                listMarkedForDeletion: null,
+            });
+            // tps.addTransaction(new MoveItem_Transaction(store, oldList, newList));
+            // tps.processNextTransaction();
+        });
     }
 
     store.setListNameEditActive = (status) => {

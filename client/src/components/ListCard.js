@@ -31,7 +31,7 @@ function ListCard(props) {
         if (event.code === "Enter") {
             if (text.length > 0) {
                 let id = event.target.id.substring("list-".length);
-                // store.changeListName(id, text);
+                store.changeListName(id, text);
             }
             store.setListNameEditActive(false);
             setEditActive(false);

@@ -48,9 +48,8 @@ function Top5Item(props) {
     function handleKeyPress(event) {
         if (event.code === "Enter") {
             if (text.length > 0) {
-                // let id = event.target.id.substring("list-".length);
-                // store.changeListName(id, text);
-                console.log(`newText: ${text} at index: ${index}`)
+                // console.log(`newText: ${text} at index: ${index}`)
+                store.renameItemAtIndex(index, text);
             }
             store.setListNameEditActive(false);
             setEditActive(false);
