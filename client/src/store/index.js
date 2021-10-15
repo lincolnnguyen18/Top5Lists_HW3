@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 import jsTPS from '../common/jsTPS'
 import api from '../api'
 import MoveItem_Transaction from '../transactions/MoveItem_Transaction'
+import RenameItem_Transaction from '../transactions/RenameItem_Transaction';
 export const GlobalStoreContext = createContext({});
 /*
     This is our global data store. Note that it uses the Flux design pattern,
@@ -118,8 +119,15 @@ export const useGlobalStore = () => {
         });
     }
 
+    store.addRenameItemTransaction = (index, newName) => {
+        let oldName = store.currentList.items[index];
+        let transaction = new RenameItem_Transaction(store, oldName, newName, index);
+        tps.addTransaction(transaction);
+    }
+
     store.renameItemAtIndex = (index, newName) => {
         let newItems = store.currentList.items.slice();
+        let oldName = newItems[index];
         newItems[index] = newName;
         // console.log(store.currentList.items, newItems);
         let oldList = store.currentList;
@@ -137,8 +145,6 @@ export const useGlobalStore = () => {
                 isItemEditActive: false,
                 listMarkedForDeletion: null,
             });
-            // tps.addTransaction(new MoveItem_Transaction(store, oldList, newList));
-            // tps.processNextTransaction();
         });
     }
 
@@ -322,10 +328,12 @@ export const useGlobalStore = () => {
         }
         asyncSetCurrentList(id);
     }
+
     store.addMoveItemTransaction = function (start, end) {
         let transaction = new MoveItem_Transaction(store, start, end);
         tps.addTransaction(transaction);
     }
+
     store.moveItem = function (start, end) {
         start -= 1;
         end -= 1;

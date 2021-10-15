@@ -49,7 +49,7 @@ function Top5Item(props) {
         if (event.code === "Enter") {
             if (text.length > 0) {
                 // console.log(`newText: ${text} at index: ${index}`)
-                store.renameItemAtIndex(index, text);
+                store.addRenameItemTransaction(index, text);
             }
             store.setListNameEditActive(false);
             setEditActive(false);
