@@ -32,21 +32,21 @@ function EditToolbar() {
                 // disabled={true}
                 id='undo-button'
                 onClick={handleUndo}
-                className={`${enabledButtonClass} ${!store.canUndo() ? 'top5-button-disabled' : ''}`}>
+                className={`${enabledButtonClass} ${!store.canUndo() || store.isListNameEditActive ? 'top5-button-disabled' : ''}`}>
                 &#x21B6;
             </div>
             <div
                 // disabled={true}
                 id='redo-button'
                 onClick={handleRedo}
-                className={`${enabledButtonClass} ${!store.canRedo() ? 'top5-button-disabled' : ''}`}>
+                className={`${enabledButtonClass} ${!store.canRedo() || store.isListNameEditActive ? 'top5-button-disabled' : ''}`}>
                 &#x21B7;
             </div>
             <div
                 // disabled={store.currentList == null}
                 id='close-button'
                 onClick={handleClose}
-                className={`${enabledButtonClass} ${store.currentList == null ? 'top5-button-disabled' : ''}`}>
+                className={`${enabledButtonClass} ${store.currentList == null || store.isListNameEditActive ? 'top5-button-disabled' : ''}`}>
                 &#x24E7;
             </div>
         </div>

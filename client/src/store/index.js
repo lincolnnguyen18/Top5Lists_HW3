@@ -121,6 +121,9 @@ export const useGlobalStore = () => {
 
     store.addRenameItemTransaction = (index, newName) => {
         let oldName = store.currentList.items[index];
+        if (oldName == newName) {
+            return;
+        }
         let transaction = new RenameItem_Transaction(store, oldName, newName, index);
         tps.addTransaction(transaction);
     }
@@ -330,6 +333,9 @@ export const useGlobalStore = () => {
     }
 
     store.addMoveItemTransaction = function (start, end) {
+        if (start == end) {
+            return;
+        }
         let transaction = new MoveItem_Transaction(store, start, end);
         tps.addTransaction(transaction);
     }
