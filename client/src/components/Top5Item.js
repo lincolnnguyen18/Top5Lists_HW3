@@ -50,11 +50,10 @@ function Top5Item(props) {
             if (text.length > 0) {
                 // let id = event.target.id.substring("list-".length);
                 // store.changeListName(id, text);
-                console.log(`newText: ${text}`)
+                console.log(`newText: ${text} at index: ${index}`)
             }
             store.setListNameEditActive(false);
             setEditActive(false);
-            // toggleEdit();
         }
     }
 
@@ -71,7 +70,17 @@ function Top5Item(props) {
     let cardStatus = store.isListNameEditActive;
 
     let cardElement = 
-    <>
+    <div
+        id={'item-' + (index + 1)}
+        key={'item-' + (index + 1)}
+        className={itemClass}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        draggable="true"
+    >
         <input
             disabled={cardStatus}
             type="button"
@@ -86,10 +95,20 @@ function Top5Item(props) {
             value={"\u270E"}
             />
         {props.text}
-    </>;
+    </div>;
 
     if (editActive) {
         cardElement =
+        <div
+        id={'item-' + (index + 1)}
+        className={itemClass}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        draggable="true"
+        >
             <input
                 id={"item-" + index + 1}
                 type='text'
@@ -97,22 +116,12 @@ function Top5Item(props) {
                 onKeyPress={handleKeyPress}
                 onChange={handleUpdateText}
                 defaultValue={props.text}
-            />;
+            />
+        </div>;
     }
 
     return (
-        <div
-            id={'item-' + (index + 1)}
-            className={itemClass}
-            onDragStart={handleDragStart}
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            draggable="true"
-        >
-            {cardElement}
-        </div>
+        cardElement
     );
 }
 
