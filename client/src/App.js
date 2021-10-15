@@ -1,9 +1,8 @@
 import './App.css';
-import { React } from 'react'
+import { React, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Banner, ListSelector, Statusbar, Workspace, DeleteModal } from './components'
 import { GlobalStoreContext } from './store'
-import { useHistory } from 'react-router-dom'
 
 /*
     This is our application's top-level component.
@@ -11,6 +10,8 @@ import { useHistory } from 'react-router-dom'
     @author McKilla Gorilla
 */
 const App = () => {
+    const { store } = useContext(GlobalStoreContext);
+
     return (
         <Router>
             <Banner />

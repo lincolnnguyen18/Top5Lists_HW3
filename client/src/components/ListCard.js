@@ -27,13 +27,13 @@ function ListCard(props) {
         }
     }
 
-    function toggleEdit() {
-        let newActive = !editActive;
-        if (newActive) {
-            store.setIsListNameEditActive();
-        }
-        setEditActive(newActive);
-    }
+    // function toggleEdit() {
+    //     let newActive = !editActive;
+    //     if (newActive) {
+    //         store.setIsListNameEditActive();
+    //     }
+    //     setEditActive(newActive);
+    // }
 
     function handleKeyPress(event) {
         if (event.code === "Enter") {
@@ -56,11 +56,6 @@ function ListCard(props) {
         selectClass = "selected-list-card";
     }
     let cardStatus = store.isListNameEditActive;
-    // if (store.isListNameEditActive) {
-    //     cardStatus = true;
-    // } else {
-
-    // }
     let cardElement =
         <div
             id={idNamePair._id}

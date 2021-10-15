@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import jsTPS from '../common/jsTPS'
 import api from '../api'
 import MoveItem_Transaction from '../transactions/MoveItem_Transaction'
@@ -35,6 +35,7 @@ export const useGlobalStore = () => {
         itemActive: false,
         listMarkedForDeletion: null,
         listToDelete: {name: null, id: null},
+        editItemIndex: null
     });
 
     // HERE'S THE DATA STORE'S REDUCER, IT MUST
@@ -105,6 +106,42 @@ export const useGlobalStore = () => {
     // DRIVE THE STATE OF THE APPLICATION. WE'LL CALL THESE IN 
     // RESPONSE TO EVENTS INSIDE OUR COMPONENTS.
 
+    store.setEditItemIndex = (index) => {
+        setStore({
+            idNamePairs: store.idNamePairs,
+            currentList: store.currentList,
+            newListCounter: store.newListCounter,
+            isListNameEditActive: store.isListNameEditActive,
+            isItemEditActive: true,
+            listMarkedForDeletion: store.listMarkedForDeletion,
+            editItemIndex: index
+        });
+    }
+
+    store.renameItemAtIndex = (index, newName) => {
+        console.log('test');
+        let newItems = store.currentList.items.slice();
+        newItems[index - 1] = newName;
+        // console.log(store.currentList.items, newItems);
+        let oldList = store.currentList;
+        let newList = {
+            ...store.currentList,
+            items: newItems
+        }
+        // console.log(oldList, newList);
+        api.updateTop5ListById(store.currentList._id, newList);
+        // setStore({
+        //     idNamePairs: store.idNamePairs,
+        //     currentList: {
+        //         ...store.currentList,
+        //         items: newItems
+        //     },
+        //     newListCounter: store.newListCounter,
+        //     isListNameEditActive: false,
+        //     isItemEditActive: false,
+        //     listMarkedForDeletion: null,
+        // });
+    }
 
     store.setListNameEditActive = (status) => {
         setStore({
@@ -240,6 +277,10 @@ export const useGlobalStore = () => {
             type: GlobalStoreActionType.CLOSE_CURRENT_LIST,
             payload: {}
         });
+    }
+
+    store.getStore = async function () {
+        return store;
     }
 
     // THIS FUNCTION LOADS ALL THE ID, NAME PAIRS SO WE CAN LIST ALL THE LISTS
